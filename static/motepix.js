@@ -1,7 +1,7 @@
 
 $(document).ready(
 	function() {
-		console.log("document ready");
+		// console.log("document ready");
 		$.get("/my_data", data_received);
 		
 		/*
@@ -18,8 +18,6 @@ $(document).ready(
 
 function data_received(response)
 {
-	console.log("data_received:" + response);
-	$("#pixel").attr("style", "width:100px;height:100px;background-color:black");
-	//$("#status").text("Daten empfangen");
-	//$.get("/my_data", data_received)
+	// console.log("data_received:" + response);
+	$("#pixel").attr("style", "width:100px;height:100px;background-color:" + response);
 }
