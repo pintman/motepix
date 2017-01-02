@@ -1,9 +1,13 @@
 """Ein server für motepix clients."""
 
-class MotepixServer:
-    def __init__(self, port=55443):
-        """Startet einen motepix server."""
+import bottle
 
+@bottle.route("/register")
+def register():
+    """Register a new client."""
+    # import pdb; pdb.set_trace()
+    print(bottle.request)
 
 if __name__ == "__main__":
-    MotepixServer()
+    bottle.run(host="localhost", port=8080, debug=True, reloader=True)
+    
