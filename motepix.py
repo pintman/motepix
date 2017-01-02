@@ -2,6 +2,8 @@
 
 import bottle
 
+on_off = True
+
 
 @bottle.route("/register")
 def register():
@@ -9,10 +11,22 @@ def register():
     # import pdb; pdb.set_trace()
     print(bottle.request)
 
-
 @bottle.route("/show")
 def show():
-    return bottle.template("index")
+    global on_off
+    on_off = not on_off
+    print("show")
+    return bottle.template("index", status=on_off, title=on_off)
+
+@bottle.route("/my_data")
+def my_data():
+    global on_off
+    if on_off:
+        on_off = not on_off
+        return "white"
+    else:
+        on_off = not on_off
+        return "black"
 
 @bottle.route("/static/<filename>")
 def serve_static(filename):
