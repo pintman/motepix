@@ -14,6 +14,10 @@ def register():
 def show():
     return bottle.template("index")
 
+@bottle.route("/static/<filename>")
+def serve_static(filename):
+    return bottle.static_file(filename, root="./static")
+
 
 if __name__ == "__main__":
     bottle.run(host="localhost", port=8088, debug=True, reloader=True)
