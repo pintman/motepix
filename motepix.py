@@ -21,7 +21,6 @@ def show(x, y):
 
 @bottle.route("/px/<x:int>/<y:int>")
 def px_color(x, y):
-    print(x, y)
     global on_off
     on_off[x][y] = not on_off[x][y]
     return color_at(x, y)
@@ -33,5 +32,6 @@ def serve_static(filename):
 
 
 if __name__ == "__main__":
-    bottle.run(host="localhost", port=8088, debug=True, reloader=True)
+    # TODO Add parameter for ip
+    bottle.run(host="192.168.178.49", port=8088, debug=True, reloader=True)
     

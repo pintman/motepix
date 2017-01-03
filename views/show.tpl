@@ -10,7 +10,6 @@
   <script src="/static/motepix.js"></script>
 
   <div id="pixel"></div>
-  <div id="status">Mein Status {{status}}</div>
 
 </body>
 
