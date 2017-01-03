@@ -2,34 +2,33 @@
 
 import bottle
 
-on_off = True
+on_off = [[False, False, False]]
 
+def color_at(x, y):
+    """Return the color at the given position."""
 
-@bottle.route("/register")
-def register():
-    """Register a new client."""
-    # import pdb; pdb.set_trace()
-    print(bottle.request)
-
-@bottle.route("/show")
-def show():
-    global on_off
-    on_off = not on_off
-    print("show")
-    return bottle.template("index", status=on_off, title=on_off)
-
-@bottle.route("/pixel_color")
-def pixel_color():
-    global on_off
-    if on_off:
-        on_off = not on_off
+    if on_off[x][y]:
         return "grey"
     else:
-        on_off = not on_off
         return "black"
+
+@bottle.route("/show/<x:int>/<y:int>")
+def show(x, y):
+    global on_off
+    on_off[x][y] = not on_off[x][y]
+    return bottle.template("show", status=on_off[x][y], title=str(x)+"|"+str(y))
+
+
+@bottle.route("/px/<x:int>/<y:int>")
+def px_color(x, y):
+    print(x, y)
+    global on_off
+    on_off[x][y] = not on_off[x][y]
+    return color_at(x, y)
 
 @bottle.route("/static/<filename>")
 def serve_static(filename):
+    """Serving static filed like js, css or images."""
     return bottle.static_file(filename, root="./static")
 
 
