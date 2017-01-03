@@ -6,12 +6,17 @@
   </head>
 
 <body>
-  <!-- TODO Auswahl der Position ermöglichen. -->
-  <script src="/static/jquery.js"></script>
-  <script src="/static/motepix.js"></script>
+  <h1>Motepix</h1>
 
-  <div id="pixel"></div>
-  <div id="status">Mein Status {{status}}</div>
+  <table border='1'>
+	% for h in range(height):
+	<tr>
+	  % for w in range(width):
+	  <td><a href="/show/{{w}}/{{h}}">({{w}} {{h}})</a></td>
+	  % end
+	</tr>
+	% end
+  </table>
 
 </body>
 
