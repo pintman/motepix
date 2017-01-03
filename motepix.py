@@ -23,6 +23,9 @@ class MotepixServer:
         for x in range(len(self.on_off)):
             for y in range(len(self.on_off[0])):
                 self.on_off[x][y] = not self.on_off[x][y]
+
+    def route_index(self):
+        return bottle.template("index", title="Index")
  
     def route_show(self, x, y):
         return bottle.template("show", status=self.color_at(x, y), title=str(x)+"|"+str(y))
@@ -38,8 +41,12 @@ class MotepixServer:
         """Worker Thread that is changing the display data."""
 
         while True:
-            self.swap_all_colors()
-            time.sleep(2)
+            # self.swap_all_colors()
+            for x in range(len(self.on_off)):
+                for y in range(len(self.on_off[0])):
+                    self.on_off[x][y] = True
+                    time.sleep(0.5)
+                    self.on_off[x][y] = False
 
 
 def main():
@@ -49,13 +56,13 @@ def main():
     bottle.route("/show/<x:int>/<y:int>")(ms.route_show)
     bottle.route("/px/<x:int>/<y:int>")(ms.route_px_color)
     bottle.route("/static/<filename>")(ms.route_serve_static)
+    bottle.route("/")(ms.route_index)
 
     th = threading.Thread(target=ms.worker)
     th.start()
     
-    bottle.run(host="192.168.178.49", port=8088, debug=True, reloader=True)
+    bottle.run(host="0.0.0.0", port=8088, debug=True, reloader=True)
     
 
 if __name__ == "__main__":
-    # TODO Add parameter for ip
     main()
