@@ -6,8 +6,8 @@
   </head>
 
 <body>
-  <script src="static/jquery.js"></script>
-  <script src="static/motepix.js"></script>
+  <script src="/static/jquery.js"></script>
+  <script src="/static/motepix.js"></script>
 
   <div id="pixel"></div>
   <div id="status">Mein Status {{status}}</div>
