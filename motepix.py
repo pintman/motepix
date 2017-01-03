@@ -4,51 +4,58 @@ import bottle
 import threading
 import time
 
-on_off = [[False, False, False]]
+
+class MotepixServer:
+
+    def __init__(self):
+        self.on_off = [[False, False, False]]
 
 
-def color_at(x, y):
-    """Return the color at the given position."""
-    global on_off
+    def color_at(self, x, y):
+        """Return the color at the given position."""
 
-    if on_off[x][y]:
-        return "grey"
-    else:
-        return "black"
+        if self.on_off[x][y]:
+            return "grey"
+        else:
+            return "black"
 
-def swap_all_colors():
-    global on_off
-    for x in range(len(on_off)):
-        for y in range(len(on_off[0])):
-            on_off[x][y] = not on_off[x][y]
+    def swap_all_colors(self):
+        for x in range(len(self.on_off)):
+            for y in range(len(self.on_off[0])):
+                self.on_off[x][y] = not self.on_off[x][y]
+ 
+    def route_show(self, x, y):
+        return bottle.template("show", status=self.color_at(x, y), title=str(x)+"|"+str(y))
 
-@bottle.route("/show/<x:int>/<y:int>")
-def show(x, y):
-    global on_off
-    return bottle.template("show", status=color_at(x, y), title=str(x)+"|"+str(y))
+    def route_px_color(self, x, y):
+        return self.color_at(x, y)
 
-@bottle.route("/px/<x:int>/<y:int>")
-def px_color(x, y):
-    return color_at(x, y)
+    def route_serve_static(self, filename):
+        """Serving static filed like js, css or images."""
+        return bottle.static_file(filename, root="./static")
 
-@bottle.route("/static/<filename>")
-def serve_static(filename):
-    """Serving static filed like js, css or images."""
-    return bottle.static_file(filename, root="./static")
+    def worker(self):
+        """Worker Thread that is changing the display data."""
 
-def worker():
-    """Worker Thread that is changing the display data."""
-    global on_off
-    while True:
-        swap_all_colors()
-        time.sleep(2)
+        while True:
+            self.swap_all_colors()
+            time.sleep(2)
 
+
+def main():
+
+    ms = MotepixServer()
+    
+    bottle.route("/show/<x:int>/<y:int>")(ms.route_show)
+    bottle.route("/px/<x:int>/<y:int>")(ms.route_px_color)
+    bottle.route("/static/<filename>")(ms.route_serve_static)
+
+    th = threading.Thread(target=ms.worker)
+    th.start()
+    
+    bottle.run(host="192.168.178.49", port=8088, debug=True, reloader=True)
+    
 
 if __name__ == "__main__":
     # TODO Add parameter for ip
-
-    th = threading.Thread(target=worker)
-    th.start()
-
-    bottle.run(host="192.168.178.49", port=8088, debug=True, reloader=True)
-    
+    main()
