@@ -8,8 +8,8 @@ import time
 class MotepixServer:
     """A server to serve single pixels to a bunch of smartphones or similar devices."""
 
-    def __init__(self, width=4, height=3):
-        self.on_off = [[False for w in range(width)] for h in range(height)]
+    def __init__(self, width=3, height=2):
+        self.on_off = [[False for w in range(height)] for h in range(width)]
 
     def color_at(self, x, y):
         """Return the color at the given position."""
@@ -24,8 +24,14 @@ class MotepixServer:
             for y in range(len(self.on_off[0])):
                 self.on_off[x][y] = not self.on_off[x][y]
 
+    def width(self):
+        return len(self.on_off)
+
+    def height(self):
+        return len(self.on_off[0])
+
     def route_index(self):
-        return bottle.template("index", title="Index")
+        return bottle.template("index", title="Konfig", width=self.width(), height=self.height())
  
     def route_show(self, x, y):
         return bottle.template("show", status=self.color_at(x, y), title=str(x)+"|"+str(y))
@@ -42,8 +48,8 @@ class MotepixServer:
 
         while True:
             # self.swap_all_colors()
-            for x in range(len(self.on_off)):
-                for y in range(len(self.on_off[0])):
+            for y in range(self.height()):
+                for x in range(self.width()):
                     self.on_off[x][y] = True
                     time.sleep(0.5)
                     self.on_off[x][y] = False
