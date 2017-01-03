@@ -10,6 +10,8 @@ class MotepixServer:
 
     def __init__(self, width=3, height=2):
         self.on_off = [[False for w in range(height)] for h in range(width)]
+        # A demo that is running
+        self.demo_programm = 0
 
     def color_at(self, x, y):
         """Return the color at the given position."""
@@ -30,13 +32,17 @@ class MotepixServer:
     def height(self):
         return len(self.on_off[0])
 
+    def route_run_demo(self, num):
+        self.demo_programm = num
+        bottle.redirect("/")
+
     def route_index(self):
         return bottle.template("index", title="Konfig", width=self.width(), height=self.height())
  
     def route_show(self, x, y):
         return bottle.template("show", status=self.color_at(x, y), title=str(x)+"|"+str(y))
 
-    def route_px_color(self, x, y):
+    def route_px(self, x, y):
         return self.color_at(x, y)
 
     def route_serve_static(self, filename):
@@ -47,28 +53,33 @@ class MotepixServer:
         """Worker Thread that is changing the display data."""
 
         while True:
-            # self.swap_all_colors()
-            for y in range(self.height()):
-                for x in range(self.width()):
-                    self.on_off[x][y] = True
-                    time.sleep(0.5)
-                    self.on_off[x][y] = False
+            if self.demo_programm == 0:
+                for y in range(self.height()):
+                    for x in range(self.width()):
+                        self.on_off[x][y] = True
+                        time.sleep(0.5)
+                        self.on_off[x][y] = False
 
+            elif self.demo_programm == 1:
+                self.swap_all_colors()
+                time.sleep(1)
+           
 
 def main():
 
     ms = MotepixServer()
     
     bottle.route("/show/<x:int>/<y:int>")(ms.route_show)
-    bottle.route("/px/<x:int>/<y:int>")(ms.route_px_color)
+    bottle.route("/px/<x:int>/<y:int>")(ms.route_px)
+    bottle.route("/run_demo/<num:int>")(ms.route_run_demo)
     bottle.route("/static/<filename>")(ms.route_serve_static)
     bottle.route("/")(ms.route_index)
 
     th = threading.Thread(target=ms.worker)
     th.start()
     
-    bottle.run(host="0.0.0.0", port=8088, debug=True, reloader=True)
-    
+    # bottle.run(host="0.0.0.0", port=8088, debug=True, reloader=True)
+    bottle.run(host="0.0.0.0", port=8088)
 
 if __name__ == "__main__":
     main()
