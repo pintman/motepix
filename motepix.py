@@ -18,12 +18,12 @@ def show():
     print("show")
     return bottle.template("index", status=on_off, title=on_off)
 
-@bottle.route("/my_data")
-def my_data():
+@bottle.route("/pixel_color")
+def pixel_color():
     global on_off
     if on_off:
         on_off = not on_off
-        return "white"
+        return "grey"
     else:
         on_off = not on_off
         return "black"
