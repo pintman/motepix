@@ -6,10 +6,10 @@ import time
 
 
 class MotepixServer:
+    """A server to serve single pixels to a bunch of smartphones or similar devices."""
 
-    def __init__(self):
-        self.on_off = [[False, False, False]]
-
+    def __init__(self, width=4, height=3):
+        self.on_off = [[False for w in range(width)] for h in range(height)]
 
     def color_at(self, x, y):
         """Return the color at the given position."""
