@@ -6,6 +6,7 @@
   </head>
 
 <body>
+  <!-- TODO Auswahl der Position ermöglichen. -->
   <script src="/static/jquery.js"></script>
   <script src="/static/motepix.js"></script>
 
