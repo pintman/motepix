@@ -8,6 +8,7 @@
 <body>
   <h1>Motepix</h1>
 
+  <!-- TODO size should be changeable. -->
   <table border='1'>
 	% for h in range(height):
 	<tr>
