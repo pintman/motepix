@@ -78,12 +78,16 @@ class MotepixServer:
                 self.swap_all_colors()
                 time.sleep(1)
             
+            elif self.demo_programm == "blink_fast":
+                self.swap_all_colors()
+                time.sleep(0.2)
+
             elif self.demo_programm == "all_on":
                 self.all_pixels(True)
                 
             elif self.demo_programm == "all_off":
                 self.all_pixels(False)
-           
+
 
 def main():
 
