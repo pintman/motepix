@@ -21,7 +21,10 @@
 
   <h1>Demos</h1>
   <a href="/run_demo/0">Demo 0</a>: alle Pixel werden der Reihe nach geschaltet<br>
-  <a href="/run_demo/1">Demo 1</a>: alle Pixel werden gleichzeitig geschaltet.
+  <a href="/run_demo/1">Demo 1</a>: alle Pixel werden gleichzeitig
+  geschaltet.<br>
+  <a href="/run_demo/2">Demo 2</a>: alle Pixel anschalten <br>
+  <a href="/run_demo/3">Demo 3</a>: alle Pixel ausschalten <br>
   <p>
 	<a href="/preview">Vorschau</a>
   </p>

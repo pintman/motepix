@@ -29,6 +29,11 @@ class MotepixServer:
             for y in range(len(self.on_off[0])):
                 self.on_off[x][y] = not self.on_off[x][y]
 
+    def all_pixels(self, on_off):
+        for y in range(self.height()):
+            for x in range(self.width()):
+                self.on_off[x][y] = on_off
+
     def width(self):
         return len(self.on_off)
 
@@ -63,6 +68,7 @@ class MotepixServer:
 
         while True:
             if self.demo_programm == 0:
+                # highlight pixels in row
                 for y in range(self.height()):
                     for x in range(self.width()):
                         self.on_off[x][y] = True
@@ -70,8 +76,17 @@ class MotepixServer:
                         self.on_off[x][y] = False
 
             elif self.demo_programm == 1:
+                # swap all pixels at once
                 self.swap_all_colors()
                 time.sleep(1)
+            
+            elif self.demo_programm == 2:
+                # turn on all pixels
+                self.all_pixels(True)
+                
+            elif self.demo_programm == 3:
+                # turn off all pixels
+                self.all_pixels(False)
            
 
 def main():
