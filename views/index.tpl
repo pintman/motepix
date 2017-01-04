@@ -20,11 +20,11 @@
   </table>
 
   <h1>Demos</h1>
-  <a href="/run_demo/0">Demo 0</a>: alle Pixel werden der Reihe nach geschaltet<br>
-  <a href="/run_demo/1">Demo 1</a>: alle Pixel werden gleichzeitig
+  <a href="/run_demo/pixel_row">Demo 0</a>: alle Pixel werden der Reihe nach geschaltet<br>
+  <a href="/run_demo/blink">Demo 1</a>: alle Pixel werden gleichzeitig
   geschaltet.<br>
-  <a href="/run_demo/2">Demo 2</a>: alle Pixel anschalten <br>
-  <a href="/run_demo/3">Demo 3</a>: alle Pixel ausschalten <br>
+  <a href="/run_demo/all_on">Demo 2</a>: alle Pixel anschalten <br>
+  <a href="/run_demo/all_off">Demo 3</a>: alle Pixel ausschalten <br>
   <p>
 	<a href="/preview">Vorschau</a>
   </p>
