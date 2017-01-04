@@ -6,7 +6,7 @@ import time
 import json
 
 
-class MotepixServer:
+class PixelServer:
     """A server to serve single pixels to a bunch of smartphones or similar 
     devices."""
 
@@ -100,17 +100,17 @@ class MotepixServer:
 
 def main():
 
-    ms = MotepixServer()
-    ms.start()
+    ps = PixelServer()
+    ps.start()
     
-    bottle.route("/show/<x:int>/<y:int>")(ms.route_show)
-    bottle.route("/data/px/<x:int>/<y:int>")(ms.route_px)
-    bottle.route("/data/pixels")(ms.route_pixels)
-    bottle.route("/data/dimensions")(ms.route_dimensions)
-    bottle.route("/run_demo/<demo_name>")(ms.route_run_demo)
-    bottle.route("/static/<filename>")(ms.route_serve_static)
-    bottle.route("/preview")(ms.route_preview)
-    bottle.route("/")(ms.route_index)
+    bottle.route("/show/<x:int>/<y:int>")(ps.route_show)
+    bottle.route("/data/px/<x:int>/<y:int>")(ps.route_px)
+    bottle.route("/data/pixels")(ps.route_pixels)
+    bottle.route("/data/dimensions")(ps.route_dimensions)
+    bottle.route("/run_demo/<demo_name>")(ps.route_run_demo)
+    bottle.route("/static/<filename>")(ps.route_serve_static)
+    bottle.route("/preview")(ps.route_preview)
+    bottle.route("/")(ps.route_index)
 
     bottle.run(host="0.0.0.0", port=8088, debug=True, reloader=True)
     #bottle.run(host="0.0.0.0", port=8088)
