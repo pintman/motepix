@@ -8,6 +8,12 @@
 <body>
   <script src="/static/jquery.js"></script>
   <script src="/static/motepix.js"></script>
+  <script>
+	$(document).ready(
+	function() {
+	  ask_for_data();
+	});
+  </script>
 
   <div id="pixel"></div>
 

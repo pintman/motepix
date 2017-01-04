@@ -3,6 +3,7 @@
 import bottle
 import threading
 import time
+import json
 
 
 class MotepixServer:
@@ -47,6 +48,12 @@ class MotepixServer:
     def route_px(self, x, y):
         return self.color_at(x, y)
 
+    def route_pixels(self):
+        return json.dumps(self.on_off)
+
+    def route_preview(self):
+        return bottle.template("preview")
+
     def route_serve_static(self, filename):
         """Serving static filed like js, css or images."""
         return bottle.static_file(filename, root="./static")
@@ -75,13 +82,15 @@ def main():
     bottle.route("/px/<x:int>/<y:int>")(ms.route_px)
     bottle.route("/run_demo/<num:int>")(ms.route_run_demo)
     bottle.route("/static/<filename>")(ms.route_serve_static)
+    bottle.route("/preview")(ms.route_preview)
+    bottle.route("/pixels")(ms.route_pixels)
     bottle.route("/")(ms.route_index)
 
     th = threading.Thread(target=ms.worker)
     th.start()
     
-    # bottle.run(host="0.0.0.0", port=8088, debug=True, reloader=True)
-    bottle.run(host="0.0.0.0", port=8088)
+    bottle.run(host="0.0.0.0", port=8088, debug=True, reloader=True)
+    #bottle.run(host="0.0.0.0", port=8088)
 
 if __name__ == "__main__":
     main()

@@ -1,11 +1,4 @@
 
-$(document).ready(
-	function() {
-		// console.log("document ready");
-		ask_for_data();
-	}
-);
-
 function ask_for_data()
 {
 	// in 'http://192.168.178.49:8088/show/0/0' fetch part after show
@@ -24,4 +17,34 @@ function data_received(response)
 	$("#pixel").attr("style", style + ";background-color:" + response);
 	// wait for some ms and ask for data again
 	window.setTimeout(ask_for_data, 10);
+}
+
+function ask_for_all_data()
+{
+	$.get("/pixels", all_data_received);
+}
+
+function all_data_received(pixel_array)
+{
+	// Convert json string into pixel 2dim-array
+	pixels = jQuery.parseJSON(pixel_array)
+	
+	// create the table statement
+	var table = "<table border=1>";
+	for(var x=0; x<pixels[0].length; x++)
+	{
+		table += "<tr>";
+		for(var y=0; y<pixels.length; y++)
+		{
+			table += "<td>" + pixels[y][x] + "</td>";
+		}
+		table += "</tr>";
+	}
+
+	// clean the div container and insert the new table array
+	$("#preview").empty()
+	$("#preview").append(table);
+
+	// wait some time and do it again
+	window.setTimeout(ask_for_all_data, 10);
 }
