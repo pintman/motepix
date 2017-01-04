@@ -7,7 +7,8 @@ import json
 
 
 class MotepixServer:
-    """A server to serve single pixels to a bunch of smartphones or similar devices."""
+    """A server to serve single pixels to a bunch of smartphones or similar 
+    devices."""
 
     # TODO add support to let others control the pixel array.
 
@@ -16,6 +17,10 @@ class MotepixServer:
         # A demo that is running
         self.demo_programm = "pixel_row"
 
+    def start(self):
+        th = threading.Thread(target=self.worker)
+        th.start()
+        
     def color_at(self, x, y):
         """Return the color at the given position."""
 
@@ -51,7 +56,8 @@ class MotepixServer:
         return bottle.template("index", title="Konfig", width=self.width(), height=self.height())
  
     def route_show(self, x, y):
-        return bottle.template("show", status=self.color_at(x, y), title=str(x)+"|"+str(y))
+        return bottle.template("show", status=self.color_at(x, y),
+                               title=str(x)+"|"+str(y))
 
     def route_px(self, x, y):
         return self.color_at(x, y)
@@ -95,6 +101,7 @@ class MotepixServer:
 def main():
 
     ms = MotepixServer()
+    ms.start()
     
     bottle.route("/show/<x:int>/<y:int>")(ms.route_show)
     bottle.route("/data/px/<x:int>/<y:int>")(ms.route_px)
@@ -105,9 +112,6 @@ def main():
     bottle.route("/preview")(ms.route_preview)
     bottle.route("/")(ms.route_index)
 
-    th = threading.Thread(target=ms.worker)
-    th.start()
-    
     bottle.run(host="0.0.0.0", port=8088, debug=True, reloader=True)
     #bottle.run(host="0.0.0.0", port=8088)
 
