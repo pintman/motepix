@@ -7,7 +7,7 @@
 
 <body>
   <h1>Motepix Vorschau</h1>
-
+  <!-- TODO move preview to index page.  -->
   <script src="/static/jquery.js"></script>
   <script src="/static/motepix.js"></script>
   <script>

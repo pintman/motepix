@@ -13,6 +13,7 @@ function ask_for_data()
 function data_received(response)
 {
 	// console.log("data_received:" + response);
+	// TODO move styles to css
 	var style = "position:absolute;top:0px;bottom:0px;width:99%";
 	$("#pixel").attr("style", style + ";background-color:" + response);
 	// wait for some ms and ask for data again
@@ -44,6 +45,7 @@ function all_data_received(pixel_array)
 			{
 				var color = "black";
 			}
+			// TODO move styles to css
 			table += "<td bgcolor='"+ color + "'>O</td>";
 		}
 		table += "</tr>";
