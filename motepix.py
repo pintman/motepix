@@ -90,11 +90,11 @@ def main():
     ms = MotepixServer()
     
     bottle.route("/show/<x:int>/<y:int>")(ms.route_show)
-    bottle.route("/px/<x:int>/<y:int>")(ms.route_px)
+    bottle.route("/data/px/<x:int>/<y:int>")(ms.route_px)
+    bottle.route("/data/pixels")(ms.route_pixels)
     bottle.route("/run_demo/<demo_name>")(ms.route_run_demo)
     bottle.route("/static/<filename>")(ms.route_serve_static)
     bottle.route("/preview")(ms.route_preview)
-    bottle.route("/pixels")(ms.route_pixels)
     bottle.route("/")(ms.route_index)
 
     th = threading.Thread(target=ms.worker)

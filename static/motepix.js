@@ -7,7 +7,7 @@ function ask_for_data()
 	var x = x_y[0];
 	var y = x_y[1];
 	// fetch pixel data async.
-	$.get("/px/"+x+"/"+y, data_received);
+	$.get("/data/px/"+x+"/"+y, data_received);
 }
 
 function data_received(response)
@@ -22,7 +22,7 @@ function data_received(response)
 
 function ask_for_all_data()
 {
-	$.get("/pixels", all_data_received);
+	$.get("/data/pixels", all_data_received);
 }
 
 function all_data_received(pixel_array)
