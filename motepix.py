@@ -40,6 +40,9 @@ class MotepixServer:
     def height(self):
         return len(self.on_off[0])
 
+    def route_dimensions(self):
+        return str(self.width()) + "x" + str(self.height())
+    
     def route_run_demo(self, demo_name):
         self.demo_programm = demo_name
         bottle.redirect("/")
@@ -96,6 +99,7 @@ def main():
     bottle.route("/show/<x:int>/<y:int>")(ms.route_show)
     bottle.route("/data/px/<x:int>/<y:int>")(ms.route_px)
     bottle.route("/data/pixels")(ms.route_pixels)
+    bottle.route("/data/dimensions")(ms.route_dimensions)
     bottle.route("/run_demo/<demo_name>")(ms.route_run_demo)
     bottle.route("/static/<filename>")(ms.route_serve_static)
     bottle.route("/preview")(ms.route_preview)
