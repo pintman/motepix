@@ -36,7 +36,15 @@ function all_data_received(pixel_array)
 		table += "<tr>";
 		for(var y=0; y<pixels.length; y++)
 		{
-			table += "<td>" + pixels[y][x] + "</td>";
+			if(pixels[y][x])
+			{
+				var color = "gray"
+			}
+			else
+			{
+				var color = "black";
+			}
+			table += "<td bgcolor='"+ color + "'>O</td>";
 		}
 		table += "</tr>";
 	}
