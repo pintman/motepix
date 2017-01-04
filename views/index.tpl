@@ -8,7 +8,10 @@
 <body>
   <h1>Motepix</h1>
 
-  <!-- TODO size should be changeable. -->
+  <!-- 
+  TODO size should be changeable. 
+  TODO change to bootstrap for nicer look on mobile devices?
+  -->
   <table border='1'>
 	% for h in range(height):
 	<tr>
