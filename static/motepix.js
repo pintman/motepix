@@ -28,7 +28,7 @@ function ask_for_all_data()
 function all_data_received(pixel_array)
 {
 	// Convert json string into pixel 2dim-array
-	pixels = jQuery.parseJSON(pixel_array)
+	var pixels = jQuery.parseJSON(pixel_array)
 	
 	// create the table statement
 	var table = "<table border=1>";
