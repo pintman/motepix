@@ -53,7 +53,8 @@ class PixelServer:
         bottle.redirect("/")
 
     def route_index(self):
-        return bottle.template("index", title="Konfig", width=self.width(), height=self.height())
+        return bottle.template("index", title="Konfig", width=self.width(),
+                               height=self.height())
  
     def route_show(self, x, y):
         return bottle.template("show", status=self.color_at(x, y),
@@ -113,7 +114,7 @@ def main():
     bottle.route("/")(ps.route_index)
 
     bottle.run(host="0.0.0.0", port=8088, debug=True, reloader=True)
-    #bottle.run(host="0.0.0.0", port=8088)
+    # bottle.run(host="0.0.0.0", port=8088)
 
 if __name__ == "__main__":
     main()
