@@ -6,8 +6,6 @@ function ask_for_data()
 	var x_y = window.location.href.split("/show/")[1].split("/");
 	var x = x_y[0];
 	var y = x_y[1];
-	// TODO switching to web sockets to allow for faster data transfer - maybe 
-	//      using justpy for this
 	// fetch pixel data async.
 	$.get("/data/px/"+x+"/"+y, data_received);
 }

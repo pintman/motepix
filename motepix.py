@@ -10,8 +10,6 @@ class PixelServer:
     """A server to serve single pixels to a bunch of smartphones or similar 
     devices."""
 
-    # TODO add support to let others control the pixel array.
-
     def __init__(self, width=3, height=2):
         self.on_off = [[False for w in range(height)] for h in range(width)]
         # A demo that is running
