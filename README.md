@@ -9,10 +9,7 @@ Smartphones zusammen als ein zusammenhängendes Display.
 Installation
 ------------
 
-Die notwendigen Bibliotheken werden mit
-
-    $ make venv
-
+Die notwendigen Bibliotheken werden mit `make venv`
 in eine virtuelle Python-Umgebung installiert.
 
-Der Server kann mit ``make dev`` gestartet werden.
+Der Server kann mit `make dev` gestartet werden.
