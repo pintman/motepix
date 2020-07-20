@@ -9,15 +9,10 @@ Smartphones zusammen als ein zusammenhängendes Display.
 Installation
 ------------
 
-Das Webframework bottle muss installiert sein - z.B. mit 
+Die notwendigen Bibliotheken werden mit
 
-    $ pip install bottle
+    $ make venv
 
-oder einfacher
+in eine virtuelle Python-Umgebung installiert.
 
-    $ pip install -r requirements.txt
-
-Anschließend kann das Programm gestartet werden:
-
-    $ python motepix.py
-
+Der Server kann mit ``make dev`` gestartet werden.
